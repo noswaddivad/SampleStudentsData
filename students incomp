@@ -1,0 +1,89 @@
+import java.util.Scanner;
+
+public class student {
+	private String firstname;
+	private String lastname;
+	private int gradeyear;
+	private String studentID;
+	private String math;
+	private String history;
+	private String english;
+	private int tuitionbalance = 0;
+	private int tuitionbalance1 = 0;
+	private String tuitionbalance2;
+	private int tuitionfeeM = 1000;
+	private int tuitionfeeH = 800;
+	private int tuitionfeeE = 1300;
+	private static int id = 1001;
+	
+	
+	//Constructor: prompt user to enter student's name and year
+	public student() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter student first name: ");
+		this.firstname = sc.nextLine();
+		
+		System.out.print("Enter student last name: ");
+		this.lastname = sc.nextLine();
+		
+		System.out.print("1 - Freshmen\n2 - Sophomore\n3 - Junior\n4 - Senior\nEnter your student class level: ");
+		this.gradeyear = sc.nextInt();
+		
+		setStudentID();
+	}
+	
+	//Generate an ID
+	private void setStudentID() {
+		id++;
+		this.studentID = gradeyear + "" + id;
+	}
+	
+	//Enroll in Course
+	public void enroll() {
+		
+		do {
+		System.out.print("Enter course to enroll (0 to quit): ");
+		Scanner sc = new Scanner(System.in);
+		String Math = sc.next();
+		if(!Math.equals("0")) {
+			math = math + "\n" + Math;
+			tuitionbalance = tuitionfeeM;
+			
+			}else {
+				break;
+			}
+		String History = sc.next();
+		if(!History.equals("0")) {
+			history = history + "\n" + History;
+			tuitionbalance1 = tuitionfeeH;
+		}else {
+			break;
+		}
+		
+		}while (1 != 0);
+		
+	}
+	
+	
+	//View Balance
+	public void viewBalance() {
+		System.out.println("Your balance is: PHP" + (tuitionbalance + tuitionbalance1));
+	}
+	//Pay tuition
+	public void payTuition() {
+		viewBalance();
+		System.out.print("Enter your payment: PHP");
+		Scanner sc = new Scanner(System.in);
+		int payment = sc.nextInt();
+		tuitionbalance = tuitionbalance - payment;
+		System.out.println("Thank you for your payment of PHP "+ payment);
+		viewBalance();
+	}
+	//Show status
+	public String toString() {
+		return "NAME: " + firstname + " " + lastname + 
+				"\nGrade Level: " + gradeyear +
+				"\nStudentID: " + studentID +
+				"\nCourses Enrolled: " + math + history ;
+	}
+}
